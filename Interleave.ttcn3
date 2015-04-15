@@ -1,0 +1,38 @@
+module Interleave
+{
+    type record Message
+    {
+        charstring text
+    }
+    type port Port_T message
+    {
+         inout Message;
+    }
+    type component DummySystem
+    {}
+    type component MTC
+    {
+        port Port_T Port;
+    }
+
+    testcase  test() runs on MTC system DummySystem
+    {
+        connect(mtc:Port, mtc:Port);
+        Port.send(Message:{"H1"});
+        Port.send(Message:{"H2"});
+        Port.send(Message:{"H3"});
+        interleave
+        {
+            [] Port.receive(Message:{"H2"}) {}
+            [] Port.receive(Message:{"H1"}) {}
+            [] Port.receive(Message:{"H3"}) 
+            {
+                setverdict(pass);
+            }
+        }
+    }
+    control 
+    {
+        execute(test());
+    }
+}
