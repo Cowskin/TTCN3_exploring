@@ -1,0 +1,22 @@
+module Hello //this is hello module!
+{
+
+//import from MTC all;
+//import from System all;
+//
+//testcase test() //runs on MTC system System 
+//{
+//   log("testcase!");
+//}
+
+control
+{
+   var integer a := hex2int('10110F00'H);
+//   execute(test());
+   /*test log two line*/
+   log("Hello world!");
+   log("Hello world2!");
+   log(a);
+}
+}
+

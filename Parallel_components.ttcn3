@@ -1,0 +1,50 @@
+module Parallel_components
+{
+type record Message
+{
+    charstring text
+}
+
+type port Port_T message
+{
+    inout Message;
+}
+
+type component PTC
+{
+    port Port_T Port;
+}
+
+type component MTC
+{}
+
+type component SystemIf
+{}
+
+function sendMessage() runs on PTC
+{
+    Port.send(Message:{"Hello World"});
+}
+function receiveMessage() runs on PTC
+{
+    Port.receive(Message:?);
+}
+testcase test() runs on MTC system SystemIf
+{
+    var PTC PTC1 := PTC.create("PTC1") alive;
+    var PTC PTC2 := PTC.create("PTC2") alive;
+
+    connect(PTC1:Port, PTC2:Port);
+    PTC1.start(sendMessage());
+    PTC2.start(receiveMessage());
+
+    PTC2.done;
+    PTC1.done;
+    setverdict(pass);
+}
+
+control
+{
+    execute(test());
+}
+}

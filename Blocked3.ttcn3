@@ -1,0 +1,19 @@
+module Blocked3
+{
+    type component PTC
+    {}
+    type component MTC
+    {}
+    type component DummySystem
+    {}
+    testcase BlockedDone() runs on MTC system DummySystem
+    {
+        var PTC ptc := PTC.create;
+        ptc.done;
+        setverdict(pass);
+    }
+    control{
+        execute(BlockedDone());
+    }
+
+}

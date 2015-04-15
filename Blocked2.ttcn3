@@ -1,0 +1,17 @@
+module Blocked2
+{
+    type component MTC
+    {}
+    type component DummySystem
+    {}
+    testcase BlockedTimer() runs on MTC system DummySystem
+    {
+        timer t:= 1.0;
+        t.timeout;
+        setverdict(pass);
+    }
+    control
+    {
+       execute(BlockedTimer());
+    }
+}

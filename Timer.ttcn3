@@ -1,0 +1,22 @@
+module Timer
+{
+    type component MTC
+    {}
+    type component SystemIf
+    {}
+
+    testcase test() runs on MTC system SystemIf
+    {
+        timer t := 5.0;
+        t.start;
+        t.timeout;
+        log("first timer stop");
+
+        t.start(5.0);
+        t.timeout;
+    }
+    control
+    {
+        execute(test());
+    }
+}

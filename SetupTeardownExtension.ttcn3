@@ -1,0 +1,25 @@
+module SetupTeardownExtension
+{
+    type component DummySystem{}
+    type component MTC{}
+    with
+    {
+        extension "setup_func=init teardown_func=postCondition"
+    }
+    function init() runs on MTC
+    {
+        log("setup function ")
+    }
+    function postCondition() runs on MTC
+    {
+        log("post condition")
+    }
+    testcase test() runs on MTC system DummySystem
+    {
+        setverdict(pass);
+    }
+    control
+    {
+        execute(test());
+    }
+}

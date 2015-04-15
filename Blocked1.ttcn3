@@ -1,0 +1,28 @@
+module Blocked1
+{
+    type record Message
+    {
+        charstring text
+    }
+    type port PortType message
+    {
+        inout Message;
+    }
+    type component MTC // main test component
+    {
+        port PortType Port;
+    }
+    type component DummySystem
+    {}
+    testcase BlockedPort() runs on MTC system DummySystem
+    {
+        connect(mtc:Port, mtc:Port);
+        Port.send(Message:{"Bye"});
+        Port.receive(Message:{"Hello"});
+        setverdict(pass);
+    }
+    control
+    {
+        execute(BlockedPort());
+    }
+}
