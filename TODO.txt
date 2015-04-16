@@ -1,0 +1,13 @@
+1.alt case
+2.send ,receive to/from/var/map 4 parameters/internal communication
+3.stop/killi/done components
+4.Parameters in/inout/out / default parameters /assignment notation
+5.templates send/recevie/optional fields with omit value/match operation
+6.difference between template and var
+7.3 special wildcards ?/*/omit
+8.templates inline/Complemented template list/Value range
+9.Sequences define  / match sequences / permutation seq
+10.length of sequences
+11.Permutations using all from
+12.var templates =? templates explicitly var =? var explicitly .
+
